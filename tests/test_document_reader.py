@@ -183,4 +183,4 @@ def test_file_exceeding_limit(tmp_path, monkeypatch):
     file_path = tmp_path / "big.txt"
     file_path.write_text("x" * 100, encoding="utf-8")
 
-    assert dr.read_document(file_path) == "File is too large to process."
+    assert dr.read_document(file_path) == "File is too large to process. Please provide a file under 10 MB."
