@@ -139,6 +139,5 @@ def read_document(file_path):
 
     # reject oversized files before passing them to a reader
     if path.is_file() and path.stat().st_size > MAX_FILE_SIZE_BYTES:
-        return "File is too large to process."
-
+        return "File is too large to process. Please provide a file under 10 MB."
     return reader(file_path)
