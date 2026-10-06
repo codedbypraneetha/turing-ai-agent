@@ -7,6 +7,9 @@ import csv
 import pymupdf
 from docx import Document
 
+# maximum file size (in bytes) that read_document will process
+MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
+
 # text file (.txt) reader
 def txt_reader(file_path):
     path = Path(file_path)
@@ -133,5 +136,9 @@ def read_document(file_path):
 
     if reader is None:
         return "Unsupported file type"
+
+    # reject oversized files before passing them to a reader
+    if path.is_file() and path.stat().st_size > MAX_FILE_SIZE_BYTES:
+        return "File is too large to process."
 
     return reader(file_path)

@@ -170,3 +170,17 @@ def test_readers_support_unicode(tmp_path):
     assert dr.csv_reader(csv_path) == [{"message": "こんにちは 世界"}]
     assert any("café" in page.lower() for page in dr.pdf_reader(pdf_path))
     assert dr.docx_reader(docx_path) == ["Olá 世界"]
+
+def test_file_within_limit(tmp_path):
+    file_path = tmp_path / "small.txt"
+    file_path.write_text("hello", encoding="utf-8")
+
+    assert dr.read_document(file_path) == "hello"
+
+
+def test_file_exceeding_limit(tmp_path, monkeypatch):
+    monkeypatch.setattr(dr, "MAX_FILE_SIZE_BYTES", 10)
+    file_path = tmp_path / "big.txt"
+    file_path.write_text("x" * 100, encoding="utf-8")
+
+    assert dr.read_document(file_path) == "File is too large to process."
