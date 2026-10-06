@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyAssistant</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <div class="mobile-bar">
+        <button
+          class="icon-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle navigation"
+        >
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+        </button>
+        <span class="mobile-bar__title">PyAssistant</span>
+        <button
+          class="icon-btn"
+          id="mobileFilesBtn"
+          aria-label="Toggle files panel"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="scrim" id="scrim"></div>
+
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <div class="brand-mark">Py</div>
+          <div class="brand-text">
+            <span class="brand-name">PyAssistant</span>
+            <span class="brand-subtitle"
+              >Your AI File &amp; Chat Companion</span
+            >
+          </div>
+        </div>
+
+        <nav class="sidebar__nav" aria-label="Primary">
+          <button class="nav-item is-active" data-view="chat">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"
+              />
+            </svg>
+            <span>Chat</span>
+          </button>
+          <button class="nav-item" data-view="files">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"
+              />
+            </svg>
+            <span>Files</span>
+          </button>
+        </nav>
+
+        <div class="sidebar__spacer"></div>
+
+        <div class="sidebar__footer">
+          <div class="user-card">
+            <span class="avatar avatar--user">S</span>
+            <span class="user-card__info">
+              <span class="user-card__name">Shon</span>
+              <span class="user-card__status"
+                ><i class="status-dot"></i>Online</span
+              >
+            </span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="chat" id="chatView">
+        <header class="chat__topbar">
+          <div class="chat__title-group">
+            <h1 class="chat__title" id="chatTitle">New Chat</h1>
+            <button
+              class="icon-btn icon-btn--ghost"
+              id="renameBtn"
+              aria-label="Rename chat"
+              title="Rename chat"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </button>
+          </div>
+          <button
+            class="icon-btn icon-btn--primary"
+            id="newChatBtn"
+            aria-label="New chat"
+            title="New chat"
+          >
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+          </button>
+        </header>
+
+        <div class="chat__messages" id="messages"></div>
+
+        <div class="composer">
+          <div class="attach-menu" id="attachMenu">
+            <button class="attach-menu__item" id="attachDocBtn">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
+                />
+                <path d="M15 2v5h5" />
+              </svg>
+              Document
+            </button>
+          </div>
+
+          <div class="composer__bar">
+            <button
+              class="icon-btn icon-btn--ghost"
+              id="attachBtn"
+              aria-label="Attach a document"
+              title="Attach a document"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M21 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l8-8"
+                />
+              </svg>
+            </button>
+            <input
+              type="text"
+              class="composer__input"
+              id="messageInput"
+              placeholder="Type a message…"
+              autocomplete="off"
+            />
+            <button class="send-btn" id="sendBtn" aria-label="Send message">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 2L11 13" />
+                <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+          </div>
+          <input
+            type="file"
+            id="hiddenFileInput"
+            hidden
+            multiple
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.ppt,.pptx,.txt,.md"
+          />
+        </div>
+      </main>
+
+      <aside class="files-panel" id="filesPanel">
+        <div class="files-panel__head">
+          <h2 class="files-panel__title">Documents</h2>
+          <span class="files-panel__count" id="fileCount">0</span>
+        </div>
+
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone__ring">
+            <svg class="dropzone__icon" viewBox="0 0 24 24">
+              <path d="M12 16V4" />
+              <path d="M7 9l5-5 5 5" />
+              <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+            </svg>
+          </div>
+          <p class="dropzone__title">Click to upload or drag and drop</p>
+          <p class="dropzone__subtitle">
+            PDF, Word, Excel, PowerPoint, CSV, TXT and MD files
+          </p>
+          <button class="btn btn--primary" id="uploadBtn">Upload File</button>
+        </div>
+
+        <div class="files-panel__section">
+          <h2 class="files-panel__heading">Recent Files</h2>
+          <ul class="file-list" id="fileList"></ul>
+          <p class="file-empty" id="fileEmpty" hidden>
+            No documents yet. Upload one to get started.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
